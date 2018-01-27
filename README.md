@@ -4,6 +4,11 @@ Frame implements a simple [PSR-15 compatible](https://github.com/php-fig/fig-sta
 
 Frame is composer managed, so the easiest way to install it is to require `xoops/frame`.
 
+[![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/XOOPS/Frame.svg?style=flat)](https://scrutinizer-ci.com/g/XOOPS/Frame/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/XOOPS/Frame.svg?style=flat)](https://scrutinizer-ci.com/g/XOOPS/Frame)
+[![Latest Version](https://img.shields.io/github/release/XOOPS/Frame.svg?style=flat)](https://github.com/XOOPS/Frame/releases)
+
 ## Xoops/Frame/Rack
 
 **Rack** is a middleware dispatcher. Instances of `Psr\Http\Server\MiddlewareInterface` can be added
