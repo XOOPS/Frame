@@ -3,6 +3,7 @@
 namespace Xoops\Test\Frame\Panel;
 
 use Xoops\Frame\Panel\ClosureToMiddleware;
+use Xoops\Frame\Rack;
 
 class ClosureToMiddlewareTest extends \PHPUnit\Framework\TestCase
 {
@@ -10,6 +11,8 @@ class ClosureToMiddlewareTest extends \PHPUnit\Framework\TestCase
     protected $object;
 
     protected $response;
+
+    protected $weWereHere;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -37,6 +40,12 @@ class ClosureToMiddlewareTest extends \PHPUnit\Framework\TestCase
     protected function mockResponse(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Server\RequestHandlerInterface $handler): \Psr\Http\Message\ResponseInterface
     {
         return $this->response;
+    }
+
+    protected function setWeWereHere(...$test)
+    {
+        $this->weWereHere = true;
+        return;
     }
 
     /**
@@ -78,5 +87,18 @@ class ClosureToMiddlewareTest extends \PHPUnit\Framework\TestCase
         $handler  = $this->generateMockRequestHandlerInterface();
         $actual = $this->object->process($request, $handler);
         $this->assertSame($this->response, $actual);
+    }
+
+    public function testProcess_noResponse()
+    {
+        $this->weWereHere = false;
+        $middleware1 = new ClosureToMiddleware(\Closure::fromCallable([$this, 'setWeWereHere']));
+        $middleware2 = new ClosureToMiddleware(\Closure::fromCallable([$this, 'mockResponse']));
+        $rack = new Rack();
+        $request = $this->generateMockServerRequestInterface();
+        $actual = $rack->add($middleware1)->add($middleware2)->run($request);
+
+        $this->assertSame($this->response, $actual);
+        $this->assertTrue($this->weWereHere);
     }
 }
