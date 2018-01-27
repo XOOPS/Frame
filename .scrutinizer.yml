@@ -1,0 +1,10 @@
+# .scrutinizer.yml
+imports:
+    - php
+filter:
+    excluded_paths:
+        - 'tests/*'
+tools:
+    external_code_coverage:
+        timeout: 1800   # Timeout in seconds.
+        runs: 1         # Scrutinizer will wait for n code coverage submissions

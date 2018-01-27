@@ -1,0 +1,35 @@
+{
+    "name": "xoops/frame",
+    "description": "XOOPS PSR-15 Middleware Dispatcher",
+    "keywords": [
+        "middleware",
+        "psr-7",
+        "psr-15"
+    ],
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "geekwright",
+            "email": "richard@geekwright.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Xoops\\Frame\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">7.1.0",
+        "psr/http-message": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/http-server-middleware": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Xoops\\Test\\Frame\\": "tests/unit/"
+        }
+    }
+}
